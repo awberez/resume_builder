@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>experience form peice</title>
+    <!-- materialize -->
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <!-- JavaScript for: jQuery, angular, materialize, and angular-materialize. All of which are needed. -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-materialize/0.2.2/angular-materialize.min.js"></script>
+    <!-- jquery ui -->
+<script
+  src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+  integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+  crossorigin="anonymous"></script>
+    <!-- materialize icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Your app -->
+    <script type="text/javascript" src="app.js"></script>
+</head>
+
+<body ng-app="materializeApp" ng-controller="BodyController">
+	<nav>
+		<div class="nav-wrapper">
+		  <div class="col s12">
+		    <a href="#!" class="breadcrumb">General</a>
+		    <a href="#!" class="breadcrumb">Skills</a>
+		    <a href="#!" class="breadcrumb">Experience</a>
+		  </div>
+		</div>
+	</nav>
+	<main>
+		<div class="container">
+		<h3>Experience</h3>
+
+		<div class="fixed-action-btn horizontal">
+			<a class="btn-floating btn-large red">
+			  <i class="large material-icons">add</i>
+			</a>
+		</div>
+
+		    <div class="row">
+		        <form class="col s12">
+		            <div class="row">
+		                <div class="input-field col s12">
+		                    <input id="jobTitleIdNumber" class="validate" type="text">
+		                    <label for="jobTitleIdNumber">Job Title</label>
+		                </div>
+		            </div>
+		            <div class="row">
+		                <div class="input-field col s6">
+		                    <input id="locationIdNumber" type="text" class="validate">
+		                    <label for="locationIdNumber">Location</label>
+		                </div>
+		                <div class="input-field col s3">
+		                    <input id="startDateIdNumber" class="datepicker" type="text">
+		                    <label for="startDateIdNumber">Start Date</label>
+		                </div>
+		                <div class="input-field col s3">
+		                    <input id="endDateIdNumber" type="text" class="datepicker">
+		                    <label for="endDateIdNumber">End Date</label>
+		                </div>
+		            </div>
+	                <div class="row">
+	                    <div class="input-field col s12">
+                            <textarea id="jobDescriptionIdNumber" class="materialize-textarea"></textarea>
+                            <label for="jobDescriptionIdNumber">Job Description</label>
+	                    </div>
+	                </div>
+		            <h5>Job Duties</h5>
+	                <ul class="collection">
+				      <li class="collection-item">Alvin</li>
+				      <li class="collection-item">Alvin</li>
+				      <li class="collection-item">Alvin</li>
+				      <li class="collection-item">Alvin</li>
+				    </ul>
+		            <h5>tags for this job</h5>
+		            <div class="row">
+		                <div class="input-field col s12">
+		                    <div class="chips chips-initial">
+		                    </div>
+		                </div>
+		            </div>
+		            
+		        </form>
+		    </div>
+
+		    <script type="text/javascript">
+		  $( document ).ready(function() {
+		    // enable datepicker
+		    $('.datepicker').pickadate({
+		        selectMonths: true, // Creates a dropdown to control month
+		        selectYears: 15, // Creates a dropdown of 15 years to control year,
+		        today: 'Today',
+		        clear: 'Clear',
+		        close: 'Ok',
+		        closeOnSelect: false // Close upon selecting a date,
+		    });
+
+		    // enable tags
+
+		    $('.chips').material_chip();
+
+		    $('.chips-initial').material_chip({
+		        data: [{
+		            tag: 'valueAlreadyEntered',
+		        }, {
+		            tag: 'valueAlreadyEntered',
+		        }],
+
+		        // options I combined from other classes/options
+		        placeholder: ' ex: coding, art',
+			    autocompleteOptions: {
+			      data: {
+			        'Apple': null,
+			        'Microsoft': null,
+			        'Google': null
+			      },
+			      limit: Infinity,
+			      minLength: 1
+			    }
+			  });
+
+		    // Use this to access the chip data
+		    // $('.chips-initial').material_chip('data');
+
+		    /*$('.chips').on('chip.add', function(e, chip){
+		    // Check current number of tags/chips - disable if need
+			});
+
+			$('.chips').on('chip.delete', function(e, chip){
+			    // Enable again
+			});*/
+
+		});
+		    </script>
+		</div>
+	 </main>
+</body>
+
+</html>
