@@ -1,0 +1,82 @@
+    <main>
+        <h5>Skills</h5>
+            <div class="row">
+                <div class="input-field col s12">
+                    <i id="skillSubmitButton" class="material-icons prefix">add_circle</i>
+                        <input placeholder="Add A Skill" id="skillIdNumber" type="text" class="validate">
+                </div>
+            </div>
+                <ul class="collection"></ul>
+            <h5>Tags for This Skill</h5>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <div class="chips chips-initial">
+                        </div>
+                    </div>
+                </div>
+            <button id="skillSubmitButton" class="btn waves-effect waves-light light-blue" type="submit" name="action">Submit Skill
+                <i class="material-icons right">check_circle</i>
+            </button>
+        </form>
+        </div>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            // enable tags
+            $('.chips').material_chip();
+            $('.chips-initial').material_chip({
+                data: [{
+                    tag: 'valueAlreadyEntered',
+                    }, {
+                    tag: 'valueAlreadyEntered',
+                    }],
+            // options combined from other classes/options
+            placeholder: ' ex: coding, art',
+                autocompleteOptions: {
+                    data: {
+                        'Apple': null,
+                        'Microsoft': null,
+                        'Google': null
+                        },
+                    limit: Infinity,
+                    minLength: 1
+                        }
+                    });
+            // Use this to access the chip data
+                // $('.chips-initial').material_chip('data');
+                /*$('.chips').on('chip.add', function(e, chip){
+    		// Check current number of tags/chips - disable if need
+    			});
+    			$('.chips').on('chip.delete', function(e, chip){
+    		// Enable again
+    			});*/
+            var newSkill = [];
+                // add the typed skill to the collection
+                $("#skillSubmitButton").on("click", function(event) {
+                    event.preventDefault();
+                        var skill = $("#skillIdNumber").val().trim();
+                        newSkill.push(skill);
+                $(".collection").append("<li class='collection-item'>" + skill + "</li>");
+                    });
+
+                console.log(newSkill)
+
+                //submit form (post method) and clear inputs
+                $.post("/api/experience", newSkill,
+                    function(data) {
+                        if (data) {
+                            alert("New skill added!");
+                        }
+
+                        else {
+                            alert("That skill has already been added.")
+                        }
+                    $("skillIdNumber").val("");
+                    })
+                });
+  
+    </script>
+
+            </div>
+        </div>
+    </main>
