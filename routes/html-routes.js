@@ -13,13 +13,20 @@ module.exports = function(app) {
   // Each of the below routes just handles the HTML page that the user gets sent to.
 
   // index route loads view.html
-app.get("/general", function(req, res) {
-  // Handlebars 
-  res.render("general");
-});
 
 app.get("/experience", function(req, res) {
   // Handlebars 
   res.render("experience");
 });
+
+app.get("/skills", function(req, res) {
+  // Handlebars 
+  res.render("skills");
+});
+
+app.get("/buildresume", function(req, res) {
+  // Handlebars 
+  res.render("build");
+});
+
 };
