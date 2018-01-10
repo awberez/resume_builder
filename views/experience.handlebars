@@ -3,6 +3,7 @@
         <div class="containerCard">
             <div class="row">
                 <form class="col s12">
+                    <h5>Job Information</h5>
                     <div class="row">
                         <div class="input-field col s12">
                             <input id="jobTitleIdNumber" class="validate" type="text">
@@ -29,18 +30,18 @@
                             <label for="jobDescriptionIdNumber">Job Description</label>
                         </div>
                     </div>
-                    <h5>Job Duties</h5>
                     <div class="row">
                         <div class="input-field col s12">
+                            <h5>Job Duties</h5>
                             <i id="jobDutySubmitButton" class="material-icons prefix">add_circle</i>
                             <input placeholder="add job duty" id="jobDutyIdNumber" type="text" class="validate">
+                            <ul class="collection">
+                            </ul>
                         </div>
                     </div>
-                    <ul class="collection">
-                    </ul>
-                    <h5>tags for this job</h5>
                     <div class="row">
                         <div class="input-field col s12">
+                            <h5>tags for this job</h5>
                             <div class="chips chips-initial">
                             </div>
                         </div>
@@ -93,12 +94,12 @@
                 // $('.chips-initial').material_chip('data');
 
                 /*$('.chips').on('chip.add', function(e, chip){
-	    // Check current number of tags/chips - disable if need
-		});
+        // Check current number of tags/chips - disable if need
+        });
 
-		$('.chips').on('chip.delete', function(e, chip){
-		    // Enable again
-		});*/
+        $('.chips').on('chip.delete', function(e, chip){
+            // Enable again
+        });*/
 
                 var newJobDuty = [];
 
