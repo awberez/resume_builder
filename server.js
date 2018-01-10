@@ -2,7 +2,7 @@ var express = require("express");
 var bodyParser = require("body-parser");
 
 var app = express();
-var PORT = process.env.PORT || 8080;
+var PORT = process.env.PORT || 8081;
 
 var db = require("./models");
 
@@ -21,3 +21,21 @@ db.sequelize.sync({ force: true }).then(function() {
     console.log("App listening on PORT " + PORT);
   });
 });
+
+// Set Handlebars.
+var exphbs = require("express-handlebars");
+
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
+
+app.get("/general", function(req, res) {
+  // Handlebars 
+  res.render("general");
+});
+
+app.get("/experience", function(req, res) {
+  // Handlebars 
+  res.render("experience");
+});
+
+app.listen(PORT);
