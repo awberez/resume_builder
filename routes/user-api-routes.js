@@ -4,10 +4,10 @@ const Op = Sequelize.Op;
 
 module.exports = function(app) {
 
-  app.get("/api/login/:user/:password", function(req, res) {
+  app.get("/api/login/:email/:password", function(req, res) {
     db.User.findOne({
       where: {
-        userName: req.params.user,
+        email: req.params.email,
         password: req.params.password
       }
     }).then(function(dbUser) {
@@ -15,10 +15,10 @@ module.exports = function(app) {
     });
   });
 
-  app.post("/api/users/:user", function(req, res) {
+  app.post("/api/users/:email", function(req, res) {
     db.User.findOne({
       where: {
-        userName: req.params.user
+        email: req.params.email
       }
     }).then(function(dbUser) {
       if (!dbUser) {
@@ -50,6 +50,17 @@ module.exports = function(app) {
       include: [db.User]
     }).then(function(dbWork) {
       res.json(dbWork);
+    });
+  });
+
+  app.get("/api/experience/:tag", function(req, res) {
+    db.Experience.findAll({
+      where: {
+        [Op.or]: [{tagOne: req.params.tag}, {tagTwo: req.params.tag}, {tagThree: req.params.tag}]
+      },
+      include: [db.User]
+    }).then(function(dbExperience) {
+      res.json(dbExperience);
     });
   });
 
