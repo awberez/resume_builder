@@ -5,7 +5,9 @@
 // Dependencies
 // =============================================================
 var path = require("path");
-
+var db = require("../models");
+var Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 // Routes
 // =============================================================
 module.exports = function(app) {
@@ -14,37 +16,40 @@ module.exports = function(app) {
 
   // index route loads view.html
 
-app.get("/experience", function(req, res) {
+app.get("/experience/:id", function(req, res) {
   // Handlebars 
-  res.render("experience");
-  /*db.User.findOne({
+  //res.render("experience");
+  db.User.findOne({
       where: {
-        id: req.body.user.id,
+        id: req.params.id,
       }
     }).then(function(dbUser) {
-      res.render("experience", { user: dbUser });*/
+      res.render("experience", { user: dbUser });
+    });
 });
 
-app.get("/skills", function(req, res) {
+app.get("/skills/:id", function(req, res) {
   // Handlebars 
-  res.render("skills");
-  /*db.User.findOne({
-    where: {
-      id: req.body.user.id,
-    }
-  }).then(function(dbUser) {
-    res.render("skills", { user: dbUser });*/
+  //res.render("skills");
+  db.User.findOne({
+      where: {
+        id: req.params.id,
+      }
+    }).then(function(dbUser) {
+    res.render("skills", { user: dbUser });
+    });
 });
 
-app.get("/buildresume", function(req, res) {
+app.get("/buildresume/:id", function(req, res) {
   // Handlebars 
-  res.render("build");
-  /*db.User.findOne({
-    where: {
-      id: req.body.user.id,
-    }
-  }).then(function(dbUser) {
-    res.render("build", { user: dbUser });*/
+  //res.render("build");
+  db.User.findOne({
+      where: {
+        id: req.params.id,
+      }
+    }).then(function(dbUser) {
+    res.render("build", { user: dbUser });
+    });
 });
 
 };
