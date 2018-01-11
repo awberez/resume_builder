@@ -11,7 +11,8 @@ module.exports = function(app) {
         password: req.params.password
       }
     }).then(function(dbUser) {
-      res.json(dbUser);
+      if (dbUser) res.render("build", { user: dbUser });
+      else res.json(false);
     });
   });
 
@@ -33,7 +34,7 @@ module.exports = function(app) {
   app.post("/api/work", function(req, res) {
     db.Work.create(req.body).then(function(dbWork) {
       res.json(dbWork);
-    }); 
+    });
   });
 
   app.post("/api/experience", function(req, res) {

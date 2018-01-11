@@ -14,6 +14,9 @@ module.exports = function(sequelize, DataTypes) {
     User.hasMany(models.Work, {
       onDelete: "cascade"
     });
+    User.hasMany(models.Tag, {
+      onDelete: "cascade"
+    });
   };
 
   return User;
