@@ -17,16 +17,34 @@ module.exports = function(app) {
 app.get("/experience", function(req, res) {
   // Handlebars 
   res.render("experience");
+  /*db.User.findOne({
+      where: {
+        id: req.body.user.id,
+      }
+    }).then(function(dbUser) {
+      res.render("experience", { user: dbUser });*/
 });
 
 app.get("/skills", function(req, res) {
   // Handlebars 
   res.render("skills");
+  /*db.User.findOne({
+    where: {
+      id: req.body.user.id,
+    }
+  }).then(function(dbUser) {
+    res.render("skills", { user: dbUser });*/
 });
 
 app.get("/buildresume", function(req, res) {
   // Handlebars 
   res.render("build");
+  /*db.User.findOne({
+    where: {
+      id: req.body.user.id,
+    }
+  }).then(function(dbUser) {
+    res.render("build", { user: dbUser });*/
 });
 
 };
