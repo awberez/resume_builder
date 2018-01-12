@@ -136,7 +136,7 @@
                 $("#experienceSubmitButton").on("click", function(event) {
                     event.preventDefault();
 
-                    var tagData = $("#experienceTags").material_chip('data');
+                    var tagDataSubmit = $("#experienceTags").material_chip('data');
 
                     var newExperience = {
                         "job": $("#jobTitle").val().trim(),
@@ -146,11 +146,11 @@
                         "jobDescription": $("#jobDescription").val().trim(),
                         "jobDuties": [jobDuties],
                         "experienceTags": [{
-                            tagOne: tagData[0].tag,
+                            tagOne: tagDataSubmit[0].tag,
                         }, {
-                            tagTwo: tagData[1].tag,
+                            tagTwo: tagDataSubmit[1].tag,
                         }, {
-                            tagThree: tagData[2].tag,
+                            tagThree: tagDataSubmit[2].tag,
                         }]
                     };
 

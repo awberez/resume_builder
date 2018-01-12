@@ -26,12 +26,13 @@
                     </div>
                     <div class="row">
                         <div class="input-field col s12">
-                            <h5>tags for this job</h5>
-                            <div class="chips chips-initial">
+                            <h5>Tags for this Job</h5>
+                            <p>(limit of three)</p>
+                            <div id="educationTags" class="chips chips-initial">
                             </div>
                         </div>
                     </div>
-                    <button id="experienceSubmitButton" class="btn waves-effect waves-light light-blue" type="submit" name="action">submit education
+                    <button id="educationSubmitButton" class="btn waves-effect waves-light light-blue" type="submit" name="action">submit education
                         <i class="material-icons right">check_circle</i>
                     </button>
                 </form>
@@ -52,59 +53,82 @@
                 });
 
                 // enable tags
-
                 $('.chips').material_chip();
-
                 $('.chips-initial').material_chip({
-                    data: [{
-                        tag: 'valueAlreadyEntered',
-                    }, {
-                        tag: 'valueAlreadyEntered',
-                    }],
-
                     // options combined from other classes/options
                     placeholder: ' ex: coding, art',
+                    secondaryPlaceholder: ' ex: coding, art',
                     autocompleteOptions: {
                         data: {
-                            'Apple': null,
-                            'Microsoft': null,
-                            'Google': null
+                            'coding': null,
+                            'art': null,
+                            'music': null,
+                            'education': null,
+                            'hospitality': null,
+                            'restuarant': null,
+                            'teamwork': null,
+                            'business': null,
+                            'social': null,
+                            'friendly': null,
+                            'science': null,
+                            'biology': null,
+                            'cashier': null,
+                            'phone': null
                         },
                         limit: Infinity,
                         minLength: 1
                     }
                 });
 
-                // Use this to access the chip data
-                // $('.chips-initial').material_chip('data');
+                // limit the number of tags to three
+                $('.chips').on('chip.add', function(e, chip) {
+                    //set the data to the current amount
+                    var tagData = $("#educationTags").material_chip('data');
+                    console.log(tagData);
 
-                /*$('.chips').on('chip.add', function(e, chip){
-        // Check current number of tags/chips - disable if need
-        });
-
-        $('.chips').on('chip.delete', function(e, chip){
-            // Enable again
-        });*/
-
+                    // Check current number of tags/chips
+                    if (tagData.length > 3) {
+                        //if greater than three (4), take off the last one
+                        tagData.splice(-1, 1);
+                        console.log(tagData);
+                        $('#educationTags').material_chip({
+                            data: [{
+                                tag: tagData[0].tag,
+                            }, {
+                                tag: tagData[1].tag,
+                            }, {
+                                tag: tagData[2].tag,
+                            }]
+                        });
+                    }
+                });
                 // when the form is submitted
-                $("#submitButton").on("click", function(event) {
+                $("#educationSubmitButton").on("click", function(event) {
                     event.preventDefault();
+
+                    var tagDataSubmit = $("#educationTags").material_chip('data');
 
                     var newEducation = {
                         "school": $("#school").val().trim(),
                         "degree": $("#degree").val().trim(),
                         "startDate": $("#startDate").val().trim(),
                         "endDate": $("#endDate").val().trim(),
-                        // tag data                     
+                        "experienceTags": [{
+                            tagOne: tagDataSubmit[0].tag,
+                        }, {
+                            tagTwo: tagDataSubmit[1].tag,
+                        }, {
+                            tagThree: tagDataSubmit[2].tag,
+                        }]                     
                     };
 
-                    //clear form
+                    /*//clear form
                     $("#school").trigger('reset');
                     $("#degree").val("");
                     $("#startDate").val = "";
                     $("#endDate").val = "";
                     // empty container 
-                    //empty tags
+                    //empty tags*/
 
                 });
 
