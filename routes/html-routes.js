@@ -56,4 +56,16 @@ app.get("/buildresume/:id", function(req, res) {
     });
 });
 
+app.get("/education/:id", function(req, res) {
+  // Handlebars 
+  //res.render("build");
+  db.User.findOne({
+      where: {
+        id: req.params.id,
+      }
+    }).then(function(dbUser) {
+    res.render("education", { user: dbUser });
+    });
+});
+
 };
