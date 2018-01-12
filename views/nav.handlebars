@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<!-- materialize -->
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <!-- JavaScript for: jQuery, angular, materialize, and angular-materialize. All of which are needed. -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-materialize/0.2.2/angular-materialize.min.js"></script>
+    <!-- jquery ui -->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+    <!-- materialize icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
+    <link rel="stylesheet" type="text/css" href="style.css">
+	<title>Resume Builder</title>
+
+	<!-- internal js -->
+    <script type="text/javascript" src="app.js"></script>
+    <!-- internal css -->
+	</head>
+	<body ng-app="materializeApp" ng-controller="BodyController">
+        <nav class="nav-extended light-blue">
+            <div class="nav-wrapper">
+                <a href="#" class="brand-logo">{{user.firstName}}'s Custom Resume Builder</a>
+                <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+            </div>
+
+            <div class="nav-content light-blue">
+                <ul class="tabs tabs-transparent">
+                    <li class="tab"><a href="/experience/{{user.id}}" id="experienceTab">Experience</a></li>
+                    <li class="tab"><a href="/skills/{{user.id}}" id="skillsTab">Skills</a></li>
+                    <li class="tab"><a href="/buildresume/{{user.id}}" id="buildTab">Build</a></li>
+                </ul>
+            </div>
+        </nav>
+		{{{ body }}}
+	</body>
+</html>

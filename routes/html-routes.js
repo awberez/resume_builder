@@ -16,6 +16,10 @@ module.exports = function(app) {
 
   // index route loads view.html
 
+app.get("/", function(req, res) {
+    res.render("login", {layout: false});
+});
+
 app.get("/experience/:id", function(req, res) {
   // Handlebars 
   //res.render("experience");
