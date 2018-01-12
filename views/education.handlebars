@@ -1,0 +1,116 @@
+<main>
+    <div class="container">
+        <div class="containerCard">
+            <div class="row">
+                <form id="myForm" class="col s12">
+                    <h5>Education</h5>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="school" class="validate" type="text">
+                            <label for="school">School</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="degree" type="text" class="validate">
+                            <label for="degree">Degree</label>
+                        </div>
+                        <div class="input-field col s3">
+                            <input id="startDate" class="datepicker" type="text">
+                            <label for="startDate">Start Date</label>
+                        </div>
+                        <div class="input-field col s3">
+                            <input id="endDate" type="text" class="datepicker">
+                            <label for="endDate">End Date</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <h5>tags for this job</h5>
+                            <div class="chips chips-initial">
+                            </div>
+                        </div>
+                    </div>
+                    <button id="experienceSubmitButton" class="btn waves-effect waves-light light-blue" type="submit" name="action">submit education
+                        <i class="material-icons right">check_circle</i>
+                    </button>
+                </form>
+            </div>
+            <script type="text/javascript">
+            $(document).ready(function() {
+                // add the active class to the correct tab
+                $("#educationTab").addClass("active");
+
+                // enable datepicker
+                $('.datepicker').pickadate({
+                    selectMonths: true, // Creates a dropdown to control month
+                    selectYears: 15, // Creates a dropdown of 15 years to control year,
+                    today: 'Today',
+                    clear: 'Clear',
+                    close: 'Ok',
+                    closeOnSelect: false // Close upon selecting a date,
+                });
+
+                // enable tags
+
+                $('.chips').material_chip();
+
+                $('.chips-initial').material_chip({
+                    data: [{
+                        tag: 'valueAlreadyEntered',
+                    }, {
+                        tag: 'valueAlreadyEntered',
+                    }],
+
+                    // options combined from other classes/options
+                    placeholder: ' ex: coding, art',
+                    autocompleteOptions: {
+                        data: {
+                            'Apple': null,
+                            'Microsoft': null,
+                            'Google': null
+                        },
+                        limit: Infinity,
+                        minLength: 1
+                    }
+                });
+
+                // Use this to access the chip data
+                // $('.chips-initial').material_chip('data');
+
+                /*$('.chips').on('chip.add', function(e, chip){
+        // Check current number of tags/chips - disable if need
+        });
+
+        $('.chips').on('chip.delete', function(e, chip){
+            // Enable again
+        });*/
+
+                // when the form is submitted
+                $("#submitButton").on("click", function(event) {
+                    event.preventDefault();
+
+                    var newEducation = {
+                        "school": $("#school").val().trim(),
+                        "degree": $("#degree").val().trim(),
+                        "startDate": $("#startDate").val().trim(),
+                        "endDate": $("#endDate").val().trim(),
+                        // tag data                     
+                    };
+
+                    //clear form
+                    $("#school").trigger('reset');
+                    $("#degree").val("");
+                    $("#startDate").val = "";
+                    $("#endDate").val = "";
+                    // empty container 
+                    //empty tags
+
+                });
+
+
+            });
+            </script>
+        </div>
+    </div>
+</main>
