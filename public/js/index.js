@@ -42,3 +42,46 @@ document.querySelector('.cont_form_login').style.display = "none";
 },500);  
   
   }
+
+$("#loginSubmit").on("click", (event)=>{
+  event.preventDefault();
+    let user = {
+    email: $("#loginEmail").val().trim(),
+    password: $("#loginPass").val().trim(),
+  };
+  $.post("/api/login", user, (res)=>{
+  		if (!res) alert("Incorrect Email or Password");
+		else window.location.replace(`/buildresume/${res.id}`);
+	});
+});
+
+$("#registerSubmit").on("click", (event)=>{
+  event.preventDefault();
+ 	let pwOne = $("#registerPassOne").val().trim(), pwTwo = $("#registerPassTwo").val().trim();
+ 	if (pwOne != pwTwo) {
+        alert("Please make sure the passwords match");
+        return false;
+    };
+    let user = {
+    email: $("#registerEmail").val().trim(),
+    password: $("#loginPass").val().trim(),
+    firstName: $("#registerFirst").val().trim(),
+    lastName: $("#registerLast").val().trim(),
+    password: $("#registerPassOne").val().trim()
+  };
+  $.post("/api/register", user, (res)=>{
+  		if (!res) alert("That email is already taken");
+		else window.location.replace(`/buildresume/${res.id}`);
+	});
+});
+
+
+
+
+
+
+
+
+
+
+
