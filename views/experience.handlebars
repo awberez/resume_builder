@@ -2,32 +2,32 @@
     <div class="container">
         <div class="containerCard">
             <div class="row">
-                <form class="col s12">
+                <form id="myForm" class="col s12">
                     <h5>Job Information</h5>
                     <div class="row">
                         <div class="input-field col s12">
-                            <input id="jobTitleIdNumber" class="validate" type="text">
-                            <label for="jobTitleIdNumber">Job Title</label>
+                            <input id="jobTitle" class="validate" type="text">
+                            <label for="jobTitle">Job Title</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s6">
-                            <input id="locationIdNumber" type="text" class="validate">
-                            <label for="locationIdNumber">Location</label>
+                            <input id="location" type="text" class="validate">
+                            <label for="location">Location</label>
                         </div>
                         <div class="input-field col s3">
-                            <input id="startDateIdNumber" class="datepicker" type="text">
-                            <label for="startDateIdNumber">Start Date</label>
+                            <input id="startDate" class="datepicker" type="text">
+                            <label for="startDate">Start Date</label>
                         </div>
                         <div class="input-field col s3">
-                            <input id="endDateIdNumber" type="text" class="datepicker">
-                            <label for="endDateIdNumber">End Date</label>
+                            <input id="endDate" type="text" class="datepicker">
+                            <label for="endDate">End Date</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s12">
-                            <textarea id="jobDescriptionIdNumber" class="materialize-textarea"></textarea>
-                            <label for="jobDescriptionIdNumber">Job Description</label>
+                            <textarea id="jobDescription" class="materialize-textarea"></textarea>
+                            <label for="jobDescription">Job Description</label>
                         </div>
                     </div>
                     <div class="row">
@@ -101,17 +101,41 @@
             // Enable again
         });*/
 
-                var newJobDuty = [];
+                var jobDuties = [];
 
                 // add the typed job duty to the collection
                 $("#jobDutySubmitButton").on("click", function(event) {
                     event.preventDefault();
-                    var jobDuty = $("#jobDutyIdNumber").val().trim();
-                    newJobDuty.push(jobDuty);
-                    $(".collection").append("<li class='collection-item'>" + jobDuty + "</li>");
+                    var newJobDuty = $("#jobDutyIdNumber").val().trim();
+                    jobDuties.push(jobDuty);
+                    $(".collection").append("<li class='collection-item'>" + newJobDuty + "</li>");
                 });
 
-                //submit form (post method) and clear input
+                // when the form is submitted
+                $("#submitButton").on("click", function(event) {
+                    event.preventDefault();
+
+                    var newExperience = {
+                        "job": $("#jobTitle").val().trim(),
+                        "location": $("#location").val().trim(),
+                        "startDate": $("#startDate").val().trim(),
+                        "endDate": $("#endDate").val().trim(),
+                        "jobDescription": $("#jobDescription").val().trim(),
+                        "jobDuties": [jobDuties]
+                        // tag data                     
+                    };
+
+                    //clear form
+                    $("#jobTitle").trigger('reset');
+                    $("#location").val("");
+                    $("#startDate").val = "";
+                    $("#endDate").val = "";
+                    $("#jobDescription") = "";
+                    // empty container 
+                    //empty tags
+
+                });
+
 
             });
             </script>
