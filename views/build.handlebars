@@ -5,15 +5,7 @@
                 <form action="#" class="col s12">
                     <h5>Check tags</h5>
                     <p>related to the resume you would like to build</p>
-                    
-                    {{#each Experiences}}
-                      {{> tables/tag-block}}
-                    {{/each}}
-
-                    {{#each Skills}}
-                      {{> tables/tag-block}}
-                    {{/each}}
-
+                    {{#each Experiences}} {{> tables/tag-block}} {{/each}} {{#each Skills}} {{> tables/tag-block}} {{/each}}
                     <div class="row">
                         <div class="input-field col s12">
                             <button id="buildSubmitButton" class="btn waves-effect waves-light light-blue" type="submit" name="action">Submit Tags
@@ -25,11 +17,15 @@
             </div>
         </div>
     </div>
-
     <script type="text/javascript">
-        $(document).ready(function() {
-                // add the active class to the correct tab
-                $("#buildTab").addClass("active");
-        });
+    $(document).ready(function() {
+        // add the active class to the correct tab
+        $("#buildTab").addClass("active");
+
+        var checkedTags = [];
+        // for the length of the tags
+            // if $("input[name=tagsCheckboxes]:checked")
+            // checkedTags.push($("input[name=tagsCheckboxes]:checked").val()
+    });
     </script>
 </main>
