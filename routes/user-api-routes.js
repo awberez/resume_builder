@@ -46,6 +46,13 @@ module.exports = function(app) {
     });
   });
 
+  app.post("/api/education", function(req, res) {
+    db.Education.create(req.body).then(function(dbEducation) {
+      console.log(dbEducation);
+      res.json(dbEducation);
+    });
+  });
+
   app.get("/api/work/:id/:tag", function(req, res) {
     db.Work.findAll({
       where: {
@@ -68,4 +75,26 @@ module.exports = function(app) {
     });
   });
 
+  app.get("/api/education/:id/:tag", function(req, res) {
+    db.Education.findAll({
+      where: {
+        [Op.or]: [{tagOne: req.params.tag}, {tagTwo: req.params.tag}, {tagThree: req.params.tag}],
+        UserId: req.params.id
+      },
+    }).then(function(dbEducation) {
+      res.json(dbEducation);
+    });
+  });
+
 };
+
+
+
+
+
+
+
+
+
+
+

@@ -1,8 +1,9 @@
+
 <main>
     <div class="container">
         <div class="containerCard">
             <div class="row">
-                <form id="myForm" class="col s12">
+                <form id="myForm" class="col s12" data-id="{{user.id}}">
                     <h5>Education</h5>
                     <div class="row">
                         <div class="input-field col s12">
@@ -41,7 +42,6 @@
             $(document).ready(function() {
                 // add the active class to the correct tab
                 $("#educationTab").addClass("active");
-
                 // enable datepicker
                 $('.datepicker').pickadate({
                     selectMonths: true, // Creates a dropdown to control month
@@ -51,7 +51,6 @@
                     close: 'Ok',
                     closeOnSelect: false // Close upon selecting a date,
                 });
-
                 // enable tags
                 $('.chips').material_chip();
                 $('.chips-initial').material_chip({
@@ -79,13 +78,11 @@
                         minLength: 1
                     }
                 });
-
                 // limit the number of tags to three
                 $('.chips').on('chip.add', function(e, chip) {
                     //set the data to the current amount
                     var tagData = $("#educationTags").material_chip('data');
                     console.log(tagData);
-
                     // Check current number of tags/chips
                     if (tagData.length > 3) {
                         //if greater than three (4), take off the last one
@@ -105,22 +102,27 @@
                 // when the form is submitted
                 $("#educationSubmitButton").on("click", function(event) {
                     event.preventDefault();
-
+                    console.log("click");
+                    var id = $("#myForm").data("id");
                     var tagDataSubmit = $("#educationTags").material_chip('data');
-
+                    var tag_one = tagDataSubmit[0] ? tagDataSubmit[0].tag : "";
+                    var tag_two = tagDataSubmit[1] ? tagDataSubmit[1].tag : "";
+                    var tag_three = tagDataSubmit[2] ? tagDataSubmit[2].tag : "";
                     var newEducation = {
-                        "school": $("#school").val().trim(),
-                        "degree": $("#degree").val().trim(),
-                        "startDate": $("#startDate").val().trim(),
-                        "endDate": $("#endDate").val().trim(),
-                        "experienceTags": [{
-                            tagOne: tagDataSubmit[0].tag,
-                        }, {
-                            tagTwo: tagDataSubmit[1].tag,
-                        }, {
-                            tagThree: tagDataSubmit[2].tag,
-                        }]                     
+                        school: $("#school").val().trim(),
+                        degree: $("#degree").val().trim(),
+                        start_date: $("#startDate").val().trim(),
+                        end_date: $("#endDate").val().trim(),
+                        tagOne: tag_one,
+                        tagTwo: tag_two,
+                        tagThree: tag_three,
+                        UserId: id 
                     };
+                    $.post("/api/education", newEducation, (res)=>{
+                        console.log(res);
+                        alert("New education experience added!");
+                        location.reload();
+                    });
 
                     /*//clear form
                     $("#school").trigger('reset');
@@ -129,10 +131,7 @@
                     $("#endDate").val = "";
                     // empty container 
                     //empty tags*/
-
                 });
-
-
             });
             </script>
         </div>
