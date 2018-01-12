@@ -4,11 +4,11 @@ const Op = Sequelize.Op;
 
 module.exports = function(app) {
 
-  app.get("/api/login/:email/:password", function(req, res) {
+  app.post("/api/login", function(req, res) {
     db.User.findOne({
       where: {
-        email: req.params.email,
-        password: req.params.password
+        email: req.body.email,
+        password: req.body.password
       }
     }).then(function(dbUser) {
       if (dbUser) res.render("build", { user: dbUser });
@@ -16,15 +16,15 @@ module.exports = function(app) {
     });
   });
 
-  app.post("/api/users/:email", function(req, res) {
+  app.post("/api/register", function(req, res) {
     db.User.findOne({
       where: {
-        email: req.params.email
+        email: req.body.email
       }
     }).then(function(dbUser) {
       if (!dbUser) {
         db.User.create(req.body).then(function(dbUser) {
-          res.json(dbUser);
+          res.render("build", { user: dbUser });
         });
       }
       else res.json(false);
@@ -43,23 +43,23 @@ module.exports = function(app) {
     });
   });
 
-  app.get("/api/work/:tag", function(req, res) {
+  app.get("/api/work/:id/:tag", function(req, res) {
     db.Work.findAll({
       where: {
-        [Op.or]: [{tagOne: req.params.tag}, {tagTwo: req.params.tag}, {tagThree: req.params.tag}]
+        [Op.or]: [{tagOne: req.params.tag}, {tagTwo: req.params.tag}, {tagThree: req.params.tag}],
+        UserId: req.params.id
       },
-      include: [db.User]
     }).then(function(dbWork) {
       res.json(dbWork);
     });
   });
 
-  app.get("/api/experience/:tag", function(req, res) {
+  app.get("/api/experience/:id/:tag", function(req, res) {
     db.Experience.findAll({
       where: {
-        [Op.or]: [{tagOne: req.params.tag}, {tagTwo: req.params.tag}, {tagThree: req.params.tag}]
+        [Op.or]: [{tagOne: req.params.tag}, {tagTwo: req.params.tag}, {tagThree: req.params.tag}],
+        UserId: req.params.id
       },
-      include: [db.User]
     }).then(function(dbExperience) {
       res.json(dbExperience);
     });
