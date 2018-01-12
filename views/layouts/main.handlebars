@@ -25,14 +25,15 @@
 	<body ng-app="materializeApp" ng-controller="BodyController">
         <nav class="nav-extended light-blue">
             <div class="nav-wrapper">
-                <a href="#" class="brand-logo">Resume Builder</a>
+                <a href="#" class="brand-logo">{{user.firstName}}'s Custom Resume Builder</a>
                 <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
             </div>
+
             <div class="nav-content light-blue">
                 <ul class="tabs tabs-transparent">
-                    <li class="tab"><a href="/experience" id="experienceTab" >Experience</a></li>
-                    <li class="tab"><a href="/skills" id="skillsTab">Skills</a></li>
-                    <li class="tab"><a href="/buildresume" id="buildTab">Build</a></li>
+                    <li class="tab"><a href="/experience/{{user.id}}" id="experienceTab">Experience</a></li>
+                    <li class="tab"><a href="/skills/{{user.id}}" id="skillsTab">Skills</a></li>
+                    <li class="tab"><a href="/buildresume/{{user.id}}" id="buildTab">Build</a></li>
                 </ul>
             </div>
         </nav>
