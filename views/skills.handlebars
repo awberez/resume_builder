@@ -2,7 +2,7 @@
     <div class="container">
         <div class="containerCard">
             <div class="row">
-                <div class="col s12">
+                <form id="myForm" class="col s12" data-id="{{user.id}}">
                     <div class="row">
                         <div class="input-field col s12">
                             <h5>Skills</h5>
@@ -21,10 +21,10 @@
                             </div>
                         </div>
                     </div>
-                    <button id="skillSubmitButton" class="btn waves-effect waves-light light-blue" type="submit" name="action">Submit Skill
+                    <button id="skillSubmit" class="btn waves-effect waves-light light-blue" type="submit" name="action">Submit Skill
                         <i class="material-icons right">check_circle</i>
                     </button>
-                </div>
+                </form>
             </div>
         </div>
     </div>
@@ -97,15 +97,29 @@
         console.log(newSkill)
 
         //submit form (post method) and clear inputs
-        $.post("/api/experience", newSkill,
-            function(data) {
-                if (data) {
-                    alert("New skill added!");
-                } else {
-                    alert("That skill has already been added.")
-                }
-                $("skillForCollection").val("");
-            })
+        $("#skillSubmit").on("click", function(event) {
+            event.preventDefault();
+            console.log("click");
+            var id = $("#myForm").data("id");
+            var tagDataSubmit = $("#skillTags").material_chip('data');
+            var skills = ""
+            for (let skill of newSkill) skills += `|SKILL|${skill}`;
+            var tag_one = tagDataSubmit[0] ? tagDataSubmit[0].tag : "";
+            var tag_two = tagDataSubmit[1] ? tagDataSubmit[1].tag : "";
+            var tag_three = tagDataSubmit[2] ? tagDataSubmit[2].tag : "";
+            var newSkills = {
+                skill: skills,
+                tagOne: tag_one,
+                tagTwo: tag_two,
+                tagThree: tag_three,
+                UserId: id 
+            };
+            $.post("/api/experience", newSkills, (res)=>{
+                console.log(res);
+                alert("New skill added!");
+                location.reload();
+            });
+        });
     });
     </script>
 </main>
