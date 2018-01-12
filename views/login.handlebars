@@ -3,12 +3,12 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Login or Sign Up forms for rsume builder</title>
+  <title>Resume Builder Login</title>
   
   
   <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Open+Sans:400,300'>
 <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
-
+  <script src="https://code.jquery.com/jquery.js"></script>
       <link rel="stylesheet" href="css/style.css">
 
   
@@ -55,21 +55,21 @@
  <div class="cont_form_login">
 <a href="#" onclick="ocultar_login_sign_up()" ><i class="material-icons">&#xE5C4;</i></a>
    <h2>LOGIN</h2>
- <input type="email" placeholder="Email" class="userName" />
-<input type="password" placeholder="Password" class="userPass" />
-<button class="btn_login" onclick="cambiar_login()">LOGIN</button>
+ <input type="email" placeholder="Email" class="userName" id="loginEmail"/>
+<input type="password" placeholder="Password" class="userPass" id="loginPass"/>
+<button class="btn_login" id="loginSubmit">LOGIN</button>
   </div>
   
    <div class="cont_form_sign_up">
 <a href="#" onclick="ocultar_login_sign_up()"><i class="material-icons">&#xE5C4;</i></a>
      <h2>SIGN UP</h2>
-<input type="email" placeholder="Email" class="signupEmail" />
-<input type="text" placeholder="First Name" class="signupFName" />
-<input type="text" placeholder="Last Name" class="SignupLname" />
-<input type="number" placeholder="Phone" class="signupPhone" />
-<input type="password" placeholder="Password" class="PassOne" />
-<input type="password" placeholder="Confirm Password" class="passTwo" />
-<button class="btn_sign_up" onclick="cambiar_sign_up()">SIGN UP</button>
+<input type="email" placeholder="Email" class="signupEmail" id="registerEmail"/>
+<input type="text" placeholder="First Name" class="signupFName" id="registerFirst"/>
+<input type="text" placeholder="Last Name" class="SignupLname" id="registerLast"/>
+<input type="number" placeholder="Phone" class="signupPhone" id="registerPhone"/>
+<input type="password" placeholder="Password" class="PassOne" id="registerPassOne"/>
+<input type="password" placeholder="Confirm Password" class="passTwo" id="registerPassTwo"/>
+<button class="btn_sign_up" id="registerSubmit">SIGN UP</button>
 
   </div>
 

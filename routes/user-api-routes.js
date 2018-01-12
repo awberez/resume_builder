@@ -5,14 +5,14 @@ const Op = Sequelize.Op;
 module.exports = function(app) {
 
   app.post("/api/login", function(req, res) {
+    console.log(req.body);
     db.User.findOne({
       where: {
         email: req.body.email,
         password: req.body.password
       }
     }).then(function(dbUser) {
-      if (dbUser) res.render("build", { user: dbUser });
-      else res.json(false);
+      res.json(dbUser);
     });
   });
 
@@ -22,9 +22,12 @@ module.exports = function(app) {
         email: req.body.email
       }
     }).then(function(dbUser) {
+      console.log(dbUser);
       if (!dbUser) {
         db.User.create(req.body).then(function(dbUser) {
-          res.render("build", { user: dbUser });
+          console.log("newUser");
+          console.log(dbUser);
+          res.json(dbUser);
         });
       }
       else res.json(false);
