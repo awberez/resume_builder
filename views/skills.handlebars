@@ -8,7 +8,7 @@
                             <h5>Skills</h5>
                             <form>
                                 <i id="skillSubmitButton" class="material-icons prefix">add_circle</i>
-                                <input placeholder="Add A Skill" id="skillIdNumber" type="text" class="validate">
+                                <input placeholder="Add A Skill" id="skillForCollection" type="text" class="validate">
                             </form>
                             <ul class="collection"></ul>
                         </div>
@@ -16,7 +16,8 @@
                     <div class="row">
                         <div class="input-field col s12">
                             <h5>Tags for this Skill</h5>
-                            <div class="chips chips-initial">
+                            <p>limit of three</p>
+                            <div id="skillTags" class="chips chips-initial">
                             </div>
                         </div>
                     </div>
@@ -29,41 +30,67 @@
     </div>
     <script type="text/javascript">
     $(document).ready(function() {
+        // add the active class to the correct tab
+        $("#skillsTab").addClass("active");
+
         // enable tags
         $('.chips').material_chip();
         $('.chips-initial').material_chip({
-            data: [{
-                tag: 'valueAlreadyEntered',
-            }, {
-                tag: 'valueAlreadyEntered',
-            }],
             // options combined from other classes/options
             placeholder: ' ex: coding, art',
             autocompleteOptions: {
                 data: {
-                    'Apple': null,
-                    'Microsoft': null,
-                    'Google': null
+                    'coding': null,
+                    'art': null,
+                    'music': null,
+                    'education': null,
+                    'hospitality': null,
+                    'restuarant': null,
+                    'teamwork': null,
+                    'business': null,
+                    'social': null,
+                    'friendly': null,
+                    'science': null,
+                    'biology': null,
+                    'cashier': null,
+                    'phone' : null
                 },
                 limit: Infinity,
                 minLength: 1
             }
         });
-        // Use this to access the chip data
-        // $('.chips-initial').material_chip('data');
-        /*$('.chips').on('chip.add', function(e, chip){
-            // Check current number of tags/chips - disable if need
+
+        // limit the number of tags to three
+        $('.chips').on('chip.add', function(e, chip) {
+            //set the data to the current amount
+            var tagData = $("#skillTags").material_chip('data');
+            console.log(tagData);
+
+            // Check current number of tags/chips
+            if (tagData.length > 3) {
+                //if greater than three (4), take off the last one
+                tagData.splice(-1, 1);
+                console.log(tagData);
+                $('#skillTags').material_chip({
+                    data: [{
+                        tag: tagData[0].tag,
+                    }, {
+                        tag: tagData[1].tag,
+                    }, {
+                        tag: tagData[2].tag,
+                    }]
                 });
-                $('.chips').on('chip.delete', function(e, chip){
-            // Enable again
-                });*/
+            }
+        });
+
         var newSkill = [];
         // add the typed skill to the collection
         $("#skillSubmitButton").on("click", function(event) {
             event.preventDefault();
-            var skill = $("#skillIdNumber").val().trim();
+            var skill = $("#skillForCollection").val().trim();
             newSkill.push(skill);
             $(".collection").append("<li class='collection-item'>" + skill + "</li>");
+            $("#skillForCollection").val("");
         });
 
         console.log(newSkill)
@@ -76,7 +103,7 @@
                 } else {
                     alert("That skill has already been added.")
                 }
-                $("skillIdNumber").val("");
+                $("skillForCollection").val("");
             })
     });
     </script>

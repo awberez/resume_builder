@@ -34,15 +34,16 @@
                         <div class="input-field col s12">
                             <h5>Job Duties</h5>
                             <i id="jobDutySubmitButton" class="material-icons prefix">add_circle</i>
-                            <input placeholder="add job duty" id="jobDutyIdNumber" type="text" class="validate">
+                            <input placeholder="add job duty" id="jobDuty" type="text" class="validate">
                             <ul class="collection">
                             </ul>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s12">
-                            <h5>tags for this job</h5>
-                            <div class="chips chips-initial">
+                            <h5>Tags for this Job</h5>
+                            <p>(limit of three)</p>
+                            <div id="experienceTags" class="chips chips-initial">
                             </div>
                         </div>
                     </div>
@@ -71,49 +72,70 @@
                 $('.chips').material_chip();
 
                 $('.chips-initial').material_chip({
-                    data: [{
-                        tag: 'valueAlreadyEntered',
-                    }, {
-                        tag: 'valueAlreadyEntered',
-                    }],
 
                     // options combined from other classes/options
                     placeholder: ' ex: coding, art',
                     autocompleteOptions: {
                         data: {
-                            'Apple': null,
-                            'Microsoft': null,
-                            'Google': null
+                            'coding': null,
+                            'art': null,
+                            'music': null,
+                            'education': null,
+                            'hospitality': null,
+                            'restuarant': null,
+                            'teamwork': null,
+                            'business': null,
+                            'social': null,
+                            'friendly': null,
+                            'science': null,
+                            'biology': null,
+                            'cashier': null,
+                            'phone': null
                         },
                         limit: Infinity,
                         minLength: 1
                     }
                 });
 
-                // Use this to access the chip data
-                // $('.chips-initial').material_chip('data');
+                // limit the number of tags to three
+                $('.chips').on('chip.add', function(e, chip) {
+                    //set the data to the current amount
+                    var tagData = $("#experienceTags").material_chip('data');
+                    console.log(tagData);
 
-                /*$('.chips').on('chip.add', function(e, chip){
-        // Check current number of tags/chips - disable if need
-        });
-
-        $('.chips').on('chip.delete', function(e, chip){
-            // Enable again
-        });*/
+                    // Check current number of tags/chips
+                    if (tagData.length > 3) {
+                        //if greater than three (4), take off the last one
+                        tagData.splice(-1, 1);
+                        console.log(tagData);
+                        $('#experienceTags').material_chip({
+                            data: [{
+                                tag: tagData[0].tag,
+                            }, {
+                                tag: tagData[1].tag,
+                            }, {
+                                tag: tagData[2].tag,
+                            }]
+                        });
+                    }
+                });
 
                 var jobDuties = [];
 
                 // add the typed job duty to the collection
                 $("#jobDutySubmitButton").on("click", function(event) {
                     event.preventDefault();
-                    var newJobDuty = $("#jobDutyIdNumber").val().trim();
-                    jobDuties.push(jobDuty);
+                    var newJobDuty = $("#jobDuty").val().trim();
+                    jobDuties.push(newJobDuty);
                     $(".collection").append("<li class='collection-item'>" + newJobDuty + "</li>");
+                    $("#jobDuty").val("");
                 });
 
                 // when the form is submitted
-                $("#submitButton").on("click", function(event) {
+                $("#experienceSubmitButton").on("click", function(event) {
                     event.preventDefault();
+
+                    var tagData = $("#experienceTags").material_chip('data');
 
                     var newExperience = {
                         "job": $("#jobTitle").val().trim(),
@@ -121,18 +143,17 @@
                         "startDate": $("#startDate").val().trim(),
                         "endDate": $("#endDate").val().trim(),
                         "jobDescription": $("#jobDescription").val().trim(),
-                        "jobDuties": [jobDuties]
-                        // tag data                     
+                        "jobDuties": [jobDuties],
+                        "experienceTags": [{
+                            tagOne: tagData[0].tag,
+                        }, {
+                            tagTwo: tagData[1].tag,
+                        }, {
+                            tagThree: tagData[2].tag,
+                        }]
                     };
 
-                    //clear form
-                    $("#jobTitle").trigger('reset');
-                    $("#location").val("");
-                    $("#startDate").val = "";
-                    $("#endDate").val = "";
-                    $("#jobDescription") = "";
-                    // empty container 
-                    //empty tags
+                    console.log(newExperience);
 
                 });
 
