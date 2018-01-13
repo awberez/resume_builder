@@ -1,32 +1,26 @@
-var db = require("../models");
-var Sequelize = require('sequelize');
-const Op = Sequelize.Op;
+const db = require("../models"), Sequelize = require('sequelize'), Op = Sequelize.Op;
 
-module.exports = function(app) {
+module.exports = (app)=>{
 
-  app.post("/api/login", function(req, res) {
-    console.log(req.body);
+  app.post("/api/login", (req, res)=>{
     db.User.findOne({
       where: {
         email: req.body.email,
         password: req.body.password
       }
-    }).then(function(dbUser) {
+    }).then((dbUser)=>{
       res.json(dbUser);
     });
   });
 
-  app.post("/api/register", function(req, res) {
+  app.post("/api/register", (req, res)=>{
     db.User.findOne({
       where: {
         email: req.body.email
       }
-    }).then(function(dbUser) {
-      console.log(dbUser);
+    }).then((dbUser)=>{
       if (!dbUser) {
-        db.User.create(req.body).then(function(dbUser) {
-          console.log("newUser");
-          console.log(dbUser);
+        db.User.create(req.body).then((dbUser)=>{
           res.json(dbUser);
         });
       }
@@ -34,21 +28,20 @@ module.exports = function(app) {
     });
   });
 
-  app.post("/api/work", function(req, res) {
-    db.Work.create(req.body).then(function(dbWork) {
+  app.post("/api/work", (req, res)=>{
+    db.Work.create(req.body).then((dbWork)=>{
       res.json(dbWork);
     });
   });
 
-  app.post("/api/experience", function(req, res) {
-    db.Experience.create(req.body).then(function(dbExperience) {
+  app.post("/api/experience", (req, res)=>{
+    db.Experience.create(req.body).then((dbExperience)=>{
       res.json(dbExperience);
     });
   });
 
-  app.post("/api/education", function(req, res) {
-    db.Education.create(req.body).then(function(dbEducation) {
-      console.log(dbEducation);
+  app.post("/api/education", (req, res)=>{
+    db.Education.create(req.body).then((dbEducation)=>{
       res.json(dbEducation);
     });
   });
