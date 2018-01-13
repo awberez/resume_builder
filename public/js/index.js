@@ -51,7 +51,7 @@ $("#loginSubmit").on("click", (event)=>{
   };
   $.post("/api/login", user, (res)=>{
   		if (!res) alert("Incorrect Email or Password");
-		else window.location.replace(`/buildresume/${res.id}`);
+		else window.location.replace(`/education/${res.id}`);
 	});
 });
 
@@ -59,19 +59,24 @@ $("#registerSubmit").on("click", (event)=>{
   event.preventDefault();
  	let pwOne = $("#registerPassOne").val().trim(), pwTwo = $("#registerPassTwo").val().trim();
  	if (pwOne != pwTwo) {
-        alert("Please make sure the passwords match");
-        return false;
-    };
-    let user = {
+    alert("Please make sure the passwords match");
+    return false;
+  };
+  let user = {
     email: $("#registerEmail").val().trim(),
     password: $("#loginPass").val().trim(),
     firstName: $("#registerFirst").val().trim(),
     lastName: $("#registerLast").val().trim(),
     password: $("#registerPassOne").val().trim()
   };
+  if (user.email == "" || user.password == "" || user.firstName == "" || user.lastName == "" || user.password == "") {
+    alert("Please make sure to fill out every field");
+    return false;
+  };
+
   $.post("/api/register", user, (res)=>{
   		if (!res) alert("That email is already taken");
-		else window.location.replace(`/buildresume/${res.id}`);
+		else window.location.replace(`/education/${res.id}`);
 	});
 });
 
