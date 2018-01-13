@@ -2,20 +2,12 @@
     <div class="container">
         <div class="containerCard">
             <div class="row">
-                <form action="#" class="col s12">
+                <div class="col s12">
                     <h5>Choose a tag to build your custom resume!</h5>
                     {{#each tags}}  
-                    <input name="tags" type="radio" id="{{this.tag}}" />
-                    <label for="{{this.tag}}">{{this.tag}}</label>
+                    <a href="/resume/{{this.id}}/{{this.tag}}" class="waves-effect waves-light light-blue btn-large">{{this.tag}}</a>
                     {{/each}}
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <button id="buildSubmitButton" class="btn waves-effect waves-light light-blue" type="submit" name="action">Submit Tags
-                                <i class="material-icons right">check_circle</i>
-                            </button>
-                        </div>
-                    </div>
-                </form>
+                </div>
             </div>
         </div>
     </div>

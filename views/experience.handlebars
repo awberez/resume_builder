@@ -128,8 +128,9 @@
                     console.log("click");
                     var id = $("#myForm").data("id");
                     var tagDataSubmit = $("#experienceTags").material_chip('data');
-                    var job_duties = ""
-                    for (let duty of jobDuties) job_duties += `|DUTY|${duty}`;
+                    var job_duties = "•"
+                    for (let duty of jobDuties) job_duties += ` ${duty},`;
+                    job_duties = job_duties.slice(0, -1);
                     if (!tagDataSubmit[0]) {
                         alert("Please add a tag!");
                         return false;

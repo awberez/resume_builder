@@ -45,8 +45,6 @@ app.get("/skills/:id", function(req, res) {
 });
 
 app.get("/education/:id", function(req, res) {
-  // Handlebars 
-  //res.render("build");
   db.User.findOne({
       where: {
         id: req.params.id,
@@ -55,18 +53,6 @@ app.get("/education/:id", function(req, res) {
     res.render("education", { user: dbUser });
     });
 });
-
-/*app.get("/buildresume/:id", function(req, res) {
-  // Handlebars 
-  //res.render("build");
-  db.User.findOne({
-      where: {
-        id: req.params.id,
-      }
-    }).then(function(dbUser) {
-    res.render("build", { user: dbUser });
-    });
-});*/
 
 app.get("/buildresume/:id", function(req, res) {
   db.User.findOne({
@@ -104,29 +90,56 @@ app.get("/buildresume/:id", function(req, res) {
             workTags: dbWork
                   }
           var dataTags = {};
-          for (let object of data.expTags) {
-            if (object.tagOne != "") dataTags[object.tagOne] = object.tagOne;
-            if (object.tagTwo != "") dataTags[object.tagTwo] = object.tagTwo;
-            if (object.tagThree != "") dataTags[object.tagThree] = object.tagThree;
-          }
-          for (let object of data.eduTags) {
-            if (object.tagOne != "") dataTags[object.tagOne] = object.tagOne;
-            if (object.tagTwo != "") dataTags[object.tagTwo] = object.tagTwo;
-            if (object.tagThree != "") dataTags[object.tagThree] = object.tagThree;
-          }
-          for (let object of data.workTags) {
-            if (object.tagOne != "") dataTags[object.tagOne] = object.tagOne;
-            if (object.tagTwo != "") dataTags[object.tagTwo] = object.tagTwo;
-            if (object.tagThree != "") dataTags[object.tagThree] = object.tagThree;
-          }
+          getTags(data.expTags, dataTags);
+          getTags(data.eduTags, dataTags);
+          getTags(data.workTags, dataTags);
           var tagArr = [];
-          for (let tag in dataTags) tagArr.push({ "tag": tag } );
+          for (let tag in dataTags) tagArr.push({ "tag": tag, "id": dbUser.id } );
           res.render("build", { user: dbUser, tags: tagArr });
         });
       });
     });
   });
 });
+
+app.get("/resume/:id/:tag", function(req, res) {
+  db.User.findOne({
+      where: {
+        id: req.params.id,
+      }
+    }).then(function(dbUser) {
+      db.Work.findAll({
+        where: {
+          [Op.or]: [{tagOne: req.params.tag}, {tagTwo: req.params.tag}, {tagThree: req.params.tag}],
+          UserId: req.params.id
+        },
+      }).then(function(dbWork) {
+        db.Experience.findAll({
+          where: {
+            [Op.or]: [{tagOne: req.params.tag}, {tagTwo: req.params.tag}, {tagThree: req.params.tag}],
+            UserId: req.params.id
+          },
+        }).then(function(dbExperience) {
+          db.Education.findAll({
+            where: {
+              [Op.or]: [{tagOne: req.params.tag}, {tagTwo: req.params.tag}, {tagThree: req.params.tag}],
+              UserId: req.params.id
+            },
+          }).then(function(dbEducation) {
+            res.render("resume", { layout: false, user: dbUser, works: dbWork, skills: dbExperience, educations: dbEducation });
+          });
+        });
+      });
+    });
+});
+
+function getTags(objArr, newObj) {
+  for (let object of objArr) {
+    if (object.tagOne != "") newObj[object.tagOne] = object.tagOne;
+    if (object.tagTwo != "") newObj[object.tagTwo] = object.tagTwo;
+    if (object.tagThree != "") newObj[object.tagThree] = object.tagThree;
+  }
+}
 
 };
 
