@@ -64,7 +64,7 @@ $("#registerSubmit").on("click", (event)=>{
   };
   let user = {
     email: $("#registerEmail").val().trim(),
-    password: $("#loginPass").val().trim(),
+    phone: $("#registerPhone").val().trim(),
     firstName: $("#registerFirst").val().trim(),
     lastName: $("#registerLast").val().trim(),
     password: $("#registerPassOne").val().trim()
