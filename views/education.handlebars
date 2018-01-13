@@ -105,7 +105,11 @@
                     console.log("click");
                     var id = $("#myForm").data("id");
                     var tagDataSubmit = $("#educationTags").material_chip('data');
-                    var tag_one = tagDataSubmit[0] ? tagDataSubmit[0].tag : "";
+                    if (!tagDataSubmit[0]) {
+                        alert("Please add a tag!");
+                        return false;
+                    }
+                    var tag_one = tagDataSubmit[0].tag;
                     var tag_two = tagDataSubmit[1] ? tagDataSubmit[1].tag : "";
                     var tag_three = tagDataSubmit[2] ? tagDataSubmit[2].tag : "";
                     var newEducation = {

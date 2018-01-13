@@ -3,9 +3,11 @@
         <div class="containerCard">
             <div class="row">
                 <form action="#" class="col s12">
-                    <h5>Check tags</h5>
-                    <p>related to the resume you would like to build</p>
-                    {{#each Experiences}} {{> tables/tag-block}} {{/each}} {{#each Skills}} {{> tables/tag-block}} {{/each}}
+                    <h5>Choose a tag to build your custom resume!</h5>
+                    {{#each tags}}  
+                    <input name="tags" type="radio" id="{{this.tag}}" />
+                    <label for="{{this.tag}}">{{this.tag}}</label>
+                    {{/each}}
                     <div class="row">
                         <div class="input-field col s12">
                             <button id="buildSubmitButton" class="btn waves-effect waves-light light-blue" type="submit" name="action">Submit Tags
