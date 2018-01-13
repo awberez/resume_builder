@@ -53,39 +53,6 @@ module.exports = function(app) {
     });
   });
 
-  app.get("/api/work/:id/:tag", function(req, res) {
-    db.Work.findAll({
-      where: {
-        [Op.or]: [{tagOne: req.params.tag}, {tagTwo: req.params.tag}, {tagThree: req.params.tag}],
-        UserId: req.params.id
-      },
-    }).then(function(dbWork) {
-      res.json(dbWork);
-    });
-  });
-
-  app.get("/api/experience/:id/:tag", function(req, res) {
-    db.Experience.findAll({
-      where: {
-        [Op.or]: [{tagOne: req.params.tag}, {tagTwo: req.params.tag}, {tagThree: req.params.tag}],
-        UserId: req.params.id
-      },
-    }).then(function(dbExperience) {
-      res.json(dbExperience);
-    });
-  });
-
-  app.get("/api/education/:id/:tag", function(req, res) {
-    db.Education.findAll({
-      where: {
-        [Op.or]: [{tagOne: req.params.tag}, {tagTwo: req.params.tag}, {tagThree: req.params.tag}],
-        UserId: req.params.id
-      },
-    }).then(function(dbEducation) {
-      res.json(dbEducation);
-    });
-  });
-
 };
 
 

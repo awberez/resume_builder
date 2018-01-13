@@ -102,8 +102,9 @@
             console.log("click");
             var id = $("#myForm").data("id");
             var tagDataSubmit = $("#skillTags").material_chip('data');
-            var skills = ""
-            for (let skill of newSkill) skills += `|SKILL|${skill}`;
+            var skills = "•"
+            for (let skill of newSkill) skills += ` ${skill},`;
+            skills = skills.slice(0, -1);
             if (!tagDataSubmit[0]) {
                         alert("Please add a tag!");
                         return false;

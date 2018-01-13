@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 	<html>
 <head>
-	<title>#USERNAME Resume</title>
+	<title>{{user.firstName}}'s Resume</title>
 
 	<meta name="viewport" content="width=device-width"/>
 	<meta name="description" content="Resume"/>
@@ -355,13 +355,13 @@
 	<div id="pageHeader">
 		<div class="mainDetails">
 			<div id="name">
-				<h1 class="quickFade delayTwo">#USERNAME</h1>
+				<h1 class="quickFade delayTwo">{{user.firstName}} {{user.lastName}}</h1>
 			</div>
 			
 			<div id="contactDetails" class="quickFade delayFour">
 				<ul>
-					<li><a href="mailto:#EMAIL" target="_blank">#EMAIL</a></li>
-					<li>#PHONENUMBER</li>
+					<li><a href="mailto:#EMAIL" target="_blank">{{user.email}}</a></li>
+					<li>{{user.phone}}</li>
 				</ul>
 			</div>
 			<div class="clear"></div>
@@ -374,23 +374,13 @@
 			</div>
 			
 			<div class="sectionContent">
+				{{#each works}}
 				<article>
-					<h2>#JOB_TITLE</h2>
-					<p class="subDetails">#START_DATE to #END_DATE</p>
-					<p>#JOB_DUTIES</p>
+					<h2>{{this.title}}</h2>
+					<p class="subDetails">{{this.start_date}} to {{this.end_date}}</p>
+					<p>{{this.duties}}</p>
 				</article>
-				
-				<article>
-					<h2>#JOB_TITLE</h2>
-					<p class="subDetails">#START_DATE to #END_DATE</p>
-					<p>#JOB_DUTIES</p>
-				</article>
-				
-				<article>
-					<h2>#JOB_TITLE</h2>
-					<p class="subDetails">#START_DATE to #END_DATE</p>
-					<p>#JOB_DUTIES</p>
-				</article>
+				{{/each}}
 			</div>
 			<div class="clear"></div>
 		</section>
@@ -403,15 +393,9 @@
 			
 			<div class="sectionContent">
 				<ul class="keySkills">
-					<li>#SKILL</li>
-					<li>#SKILL</li>
-					<li>#SKILL</li>
-					<li>#SKILL</li>
-					<li>#SKILL</li>
-					<li>#SKILL</li>
-					<li>#SKILL</li>
-					<li>#SKILL</li>
-					<li>#SKILL</li>
+				{{#each skills}}
+					<li>{{this.skill}}</li>
+				{{/each}}
 				</ul>
 			</div>
 			<div class="clear"></div>
@@ -424,17 +408,13 @@
 			</div>
 			
 			<div class="sectionContent">
+				{{#each educations}}
 				<article>
-					<h2>#SCHOOL</h2>
-					<p class="subDetails">#DEGREE</p>
-					<p>#START_DATE to #END_DATE</p>
+					<h2>{{this.school}}</h2>
+					<p class="subDetails">{{this.degree}}</p>
+					<p>{{this.start_date}} to {{this.end_date}}</p>
 				</article>
-				
-				<article>
-					<h2>#SCHOOL</h2>
-					<p class="subDetails">#DEGREE</p>
-					<p>#START_DATE to #END_DATE</p>
-				</article>
+				{{/each}}
 			</div>
 			<div class="clear"></div>
 		</section>
